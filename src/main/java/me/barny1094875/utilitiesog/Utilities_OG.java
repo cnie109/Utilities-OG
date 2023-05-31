@@ -1,6 +1,7 @@
 package me.barny1094875.utilitiesog;
 
 import me.barny1094875.utilitiesog.Commands.PhantomToggleCommand;
+import me.barny1094875.utilitiesog.Listeners.DisableEntityCramming;
 import me.barny1094875.utilitiesog.Listeners.DisablePhantomSpawns;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -39,6 +40,7 @@ public final class Utilities_OG extends JavaPlugin {
 
         // set up listeners here
         getServer().getPluginManager().registerEvents(new DisablePhantomSpawns(), this);
+        getServer().getPluginManager().registerEvents(new DisableEntityCramming(), this);
 
 
         // set up commands here

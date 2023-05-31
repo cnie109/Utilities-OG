@@ -1,2 +1,4 @@
 # whether phantoms should spawn
 doPhantomSpawning: true
+# whether to disable entity cramming or not
+disableEntityCramming: false
