@@ -5,6 +5,10 @@ api-version: 1.18
 commands:
   togglephantoms:
     usage: /togglephantoms
+  togglecramming:
+    usage: /togglecramming
 permissions:
   util.candisablephantoms:
+    default: op
+  util.candisablecramming:
     default: op

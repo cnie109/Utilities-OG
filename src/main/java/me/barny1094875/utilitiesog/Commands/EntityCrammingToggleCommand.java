@@ -6,18 +6,19 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 
-public class PhantomToggleCommand implements CommandExecutor {
+public class EntityCrammingToggleCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args){
 
-        if(command.getName().equalsIgnoreCase("togglephantoms")){
+        if(command.getName().equalsIgnoreCase("togglecramming")){
             FileConfiguration config = Utilities_OG.getPlugin().getConfig();
-            config.set("doPhantomSpawning", !config.getBoolean("doPhantomSpawning"));
+            config.set("doEntityCramming", !config.getBoolean("doEntityCramming"));
 
-            Component parsed = Utilities_OG.getMM().deserialize("<#00ff00>[Utilities-OG]<#ffff00> Phantom spawning has been set to " + config.getBoolean("doPhantomSpawning"));
+            Component parsed = Utilities_OG.getMM().deserialize("<#00ff00>[Utilities-OG]<#ffff00> Entity cramming has been set to " + config.getBoolean("doEntityCramming"));
             sender.sendMessage(parsed);
         }
 

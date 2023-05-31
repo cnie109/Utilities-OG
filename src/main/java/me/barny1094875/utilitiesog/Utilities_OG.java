@@ -1,5 +1,6 @@
 package me.barny1094875.utilitiesog;
 
+import me.barny1094875.utilitiesog.Commands.EntityCrammingToggleCommand;
 import me.barny1094875.utilitiesog.Commands.PhantomToggleCommand;
 import me.barny1094875.utilitiesog.Listeners.DisableEntityCramming;
 import me.barny1094875.utilitiesog.Listeners.DisablePhantomSpawns;
@@ -38,13 +39,21 @@ public final class Utilities_OG extends JavaPlugin {
 
         config = this.getConfig();
 
-        // set up listeners here
-        getServer().getPluginManager().registerEvents(new DisablePhantomSpawns(), this);
-        getServer().getPluginManager().registerEvents(new DisableEntityCramming(), this);
 
+        // set up each feature here, using the config to enable only that which is desired
+        if(this.getConfig().getBoolean("PhantomToggle")){
+            // listener
+            getServer().getPluginManager().registerEvents(new DisablePhantomSpawns(), this);
+            // command
+            this.getCommand("togglephantoms").setExecutor(new PhantomToggleCommand());
+        }
+        if(this.getConfig().getBoolean("EntityCrammingDisable")) {
+            // listener
+            getServer().getPluginManager().registerEvents(new DisableEntityCramming(), this);
+            // command
+            this.getCommand("togglecramming").setExecutor(new EntityCrammingToggleCommand());
+        }
 
-        // set up commands here
-        this.getCommand("togglephantoms").setExecutor(new PhantomToggleCommand());
 
     }
 
