@@ -4,12 +4,8 @@ main: me.barny1094875.utilitiesog.Utilities_OG
 api-version: 1.18
 depend: [ NBTAPI ]
 commands:
-  togglephantoms:
-    usage: /togglephantoms
-  togglecramming:
-    usage: /togglecramming
+  utilites:
+    usage: /utilities
 permissions:
-  util.candisablephantoms:
-    default: op
   util.candisablecramming:
     default: op

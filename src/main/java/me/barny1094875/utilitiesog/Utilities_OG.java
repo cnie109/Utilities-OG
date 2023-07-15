@@ -1,7 +1,6 @@
 package me.barny1094875.utilitiesog;
 
-import me.barny1094875.utilitiesog.Commands.EntityCrammingToggleCommand;
-import me.barny1094875.utilitiesog.Commands.PhantomToggleCommand;
+import me.barny1094875.utilitiesog.Commands.UtilitiesCommand;
 import me.barny1094875.utilitiesog.Listeners.DisableEntityCramming;
 import me.barny1094875.utilitiesog.Listeners.DisablePhantomSpawns;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -65,24 +64,16 @@ public final class Utilities_OG extends JavaPlugin
         {
             // listener
             getServer().getPluginManager().registerEvents(new DisablePhantomSpawns(), this);
-            // toggle command
-            this.getCommand("togglephantoms").setExecutor(new PhantomToggleCommand());
         }
         // enable EntityCrammingDisable
         if (this.getConfig().getBoolean("EntityCrammingDisable"))
         {
             // listener
             getServer().getPluginManager().registerEvents(new DisableEntityCramming(), this);
-            // toggle command
-            this.getCommand("togglecramming").setExecutor(new EntityCrammingToggleCommand());
-        }
-        // enable ShulkerBoxStacking
-        if (this.getConfig().getBoolean("ShulkerBoxStacking"))
-        {
-            // listener
-
         }
 
+        // set up the command
+        this.getCommand("utilites").setExecutor(new UtilitiesCommand());
 
     }
 

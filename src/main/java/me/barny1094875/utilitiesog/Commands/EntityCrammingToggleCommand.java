@@ -2,18 +2,17 @@ package me.barny1094875.utilitiesog.Commands;
 
 import me.barny1094875.utilitiesog.Utilities_OG;
 import net.kyori.adventure.text.Component;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
 
-public class EntityCrammingToggleCommand implements CommandExecutor {
+public class EntityCrammingToggleCommand
+{
 
-    @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args){
-
-        if(command.getName().equalsIgnoreCase("togglecramming")){
+    public static boolean run(@NotNull CommandSender sender)
+    {
+        if (sender.hasPermission("util.candisablecramming"))
+        {
             FileConfiguration config = Utilities_OG.getPlugin().getConfig();
             config.set("doEntityCramming", !config.getBoolean("doEntityCramming"));
 
