@@ -5,20 +5,35 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class PhantomToggleCommand implements CommandExecutor {
+import java.io.IOException;
+
+public class PhantomToggleCommand implements CommandExecutor
+{
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args){
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args)
+    {
 
-        if(command.getName().equalsIgnoreCase("togglephantoms")){
-            FileConfiguration config = Utilities_OG.getPlugin().getConfig();
-            config.set("doPhantomSpawning", !config.getBoolean("doPhantomSpawning"));
+        if (command.getName().equalsIgnoreCase("togglephantoms"))
+        {
+            //            FileConfiguration config = Utilities_OG.getPlugin().getConfig();
+            YamlConfiguration phantomDisabledPlayers = Utilities_OG.getPhantomDisabledPlayers();
+            boolean playerDisabled = phantomDisabledPlayers.getBoolean(((Player) sender).getUniqueId().toString());
 
-            Component parsed = Utilities_OG.getMM().deserialize("<#00ff00>[Utilities-OG]<#ffff00> Phantom spawning has been set to " + config.getBoolean("doPhantomSpawning"));
+            phantomDisabledPlayers.set(((Player) sender).getUniqueId().toString(), !playerDisabled);
+            Component parsed = Utilities_OG.getMM().deserialize("<#00ff00>[Utilities-OG]<#ffff00> Phantom spawning has been set to " + !playerDisabled + " for you");
             sender.sendMessage(parsed);
+            try
+            {
+                phantomDisabledPlayers.save(Utilities_OG.getPhantomDisabledPlayersFile());
+            } catch (IOException e)
+            {
+                throw new RuntimeException(e);
+            }
         }
 
         return true;

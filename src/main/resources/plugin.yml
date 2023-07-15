@@ -1,7 +1,8 @@
 name: Utilities-OG
-version: '1.1'
+version: '1.0'
 main: me.barny1094875.utilitiesog.Utilities_OG
 api-version: 1.18
+depend: [ NBTAPI ]
 commands:
   togglephantoms:
     usage: /togglephantoms

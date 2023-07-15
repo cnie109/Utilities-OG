@@ -12,61 +12,103 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 
-public final class Utilities_OG extends JavaPlugin {
+public final class Utilities_OG extends JavaPlugin
+{
 
     private File file;
     private static Utilities_OG plugin;
-    private static MiniMessage mm = MiniMessage.miniMessage();
+    private static final MiniMessage mm = MiniMessage.miniMessage();
     private static FileConfiguration config;
+    private static File phantomDisabledPlayersFile;
+    private static YamlConfiguration phantomDisabledPlayers;
 
     @Override
-    public void onEnable() {
+    public void onEnable()
+    {
 
         plugin = this;
 
         this.file = new File(this.getDataFolder(), "config.yml");
-
-        try{
-            if(!this.file.exists()){
+        try
+        {
+            if (!this.file.exists())
+            {
                 this.file.createNewFile();
+                this.getConfig().options().copyDefaults(true);
+                this.saveConfig();
             }
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             this.getLogger().severe("Something went wrong when creating the config file!");
         }
-        this.getConfig().options().copyDefaults(true);
-        this.saveConfig();
-
-
         config = this.getConfig();
 
 
+        phantomDisabledPlayersFile = new File(this.getDataFolder(), "phantomDisabledUsers.yml");
+        try
+        {
+            if (!phantomDisabledPlayersFile.exists())
+            {
+                phantomDisabledPlayersFile.createNewFile();
+            }
+        } catch (IOException e)
+        {
+            this.getLogger().severe("Something went wrong when creating the config file!");
+        }
+        phantomDisabledPlayers = YamlConfiguration.loadConfiguration(phantomDisabledPlayersFile);
+
         // set up each feature here, using the config to enable only that which is desired
-        if(this.getConfig().getBoolean("PhantomToggle")){
+        // be sure to label, using comments, what each block is enabling
+
+        // enable PhantomToggle
+        if (this.getConfig().getBoolean("PhantomToggle"))
+        {
             // listener
             getServer().getPluginManager().registerEvents(new DisablePhantomSpawns(), this);
-            // command
+            // toggle command
             this.getCommand("togglephantoms").setExecutor(new PhantomToggleCommand());
         }
-        if(this.getConfig().getBoolean("EntityCrammingDisable")) {
+        // enable EntityCrammingDisable
+        if (this.getConfig().getBoolean("EntityCrammingDisable"))
+        {
             // listener
             getServer().getPluginManager().registerEvents(new DisableEntityCramming(), this);
-            // command
+            // toggle command
             this.getCommand("togglecramming").setExecutor(new EntityCrammingToggleCommand());
+        }
+        // enable ShulkerBoxStacking
+        if (this.getConfig().getBoolean("ShulkerBoxStacking"))
+        {
+            // listener
+
         }
 
 
     }
 
 
-    public static Utilities_OG getPlugin(){
+    public static Utilities_OG getPlugin()
+    {
         return plugin;
     }
 
-    public static FileConfiguration config(){
+    public static FileConfiguration config()
+    {
         return config;
     }
 
-    public static MiniMessage getMM(){
+    public static MiniMessage getMM()
+    {
         return mm;
+    }
+
+    public static YamlConfiguration getPhantomDisabledPlayers()
+    {
+        return phantomDisabledPlayers;
+    }
+
+    public static File getPhantomDisabledPlayersFile()
+    {
+        return phantomDisabledPlayersFile;
     }
 }

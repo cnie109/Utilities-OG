@@ -3,7 +3,5 @@ PhantomToggle: true
 EntityCrammingDisable: true
 
 # all of the below are config used by the plugins
-# whether phantoms should spawn
-doPhantomSpawning: true
 # whether to disable entity cramming or not
 doEntityCramming: true
