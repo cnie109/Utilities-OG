@@ -1,7 +1,7 @@
 # area for all of the feature enabling/disabling
-PhantomToggle: true
-EntityCrammingDisable: true
+PhantomToggle: false
+EntityCrammingDisable: false
 
-# all of the below are config used by the plugins
+# all of the below are config used by the plugin
 # whether to disable entity cramming or not
-doEntityCramming: true
+doEntityCramming: false
