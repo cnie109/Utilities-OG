@@ -28,20 +28,13 @@ public final class Utilities_OG extends JavaPlugin
         plugin = this;
 
         this.file = new File(this.getDataFolder(), "config.yml");
-        try
+        if (!this.file.exists())
         {
-            if (!this.file.exists())
-            {
-                this.file.createNewFile();
-                this.getConfig().options().copyDefaults(true);
-                this.saveConfig();
-            }
-        } catch (IOException e)
-        {
-            this.getLogger().severe("Something went wrong when creating the config file!");
+            this.saveDefaultConfig();
         }
-        config = this.getConfig();
 
+        this.saveDefaultConfig();
+        config = this.getConfig();
 
         phantomDisabledPlayersFile = new File(this.getDataFolder(), "phantomDisabledUsers.yml");
         try
