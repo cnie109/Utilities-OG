@@ -4,8 +4,8 @@ main: me.barny1094875.utilitiesog.Utilities_OG
 api-version: 1.18
 depend: [ NBTAPI ]
 commands:
-  utilites:
-    usage: /utilities
+  utilities:
+    usage: /utilites
 permissions:
   util.candisablecramming:
     default: op

@@ -19,7 +19,7 @@ public class PhantomToggleCommand
         boolean playerDisabled = phantomDisabledPlayers.getBoolean(((Player) sender).getUniqueId().toString());
 
         phantomDisabledPlayers.set(((Player) sender).getUniqueId().toString(), !playerDisabled);
-        Component parsed = Utilities_OG.getMM().deserialize("<#00ff00>[Utilities-OG]<#ffff00> Phantom spawning has been set to " + !playerDisabled + " for you");
+        Component parsed = Utilities_OG.getMM().deserialize("<#00ff00>[Utilities-OG]<#ffff00> Phantom spawning has been set to " + playerDisabled + " for you");
         sender.sendMessage(parsed);
         try
         {

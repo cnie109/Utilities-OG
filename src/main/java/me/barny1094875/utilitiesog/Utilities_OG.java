@@ -73,7 +73,7 @@ public final class Utilities_OG extends JavaPlugin
         }
 
         // set up the command
-        this.getCommand("utilites").setExecutor(new UtilitiesCommand());
+        this.getCommand("utilities").setExecutor(new UtilitiesCommand());
 
     }
 
