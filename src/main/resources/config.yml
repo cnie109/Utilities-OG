@@ -1,6 +1,7 @@
 # area for all of the feature enabling/disabling
-PhantomToggle: false
+PhantomToggle: true
 EntityCrammingDisable: false
+BuyMenu: true
 
 # all of the below are config used by the plugin
 # whether to disable entity cramming or not
