@@ -1,12 +1,15 @@
 # User-specific stuff
 .idea/
+.classpath
+.project
+.settings
 
 *.iml
 *.ipr
 *.iws
 
-# IntelliJ
 out/
+bin/
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 

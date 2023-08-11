@@ -1,0 +1,8 @@
+1.1:
+
+- Added about message.
+- Fixed NullPointerException.
+- Expanded documentation.
+- Improved chat formatting.
+- Block per-player commands from console.
+- Merged in and deprecated Buy-OG.
