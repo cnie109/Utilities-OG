@@ -1,9 +1,9 @@
 name: Utilities-OG
-authors: [christianniehaus, NotAlexNoyle]
-version: '1.1'
+authors: [ christianniehaus, NotAlexNoyle ]
+version: '1.2'
 main: me.barny1094875.utilitiesog.Utilities_OG
 api-version: 1.18
-depend: [NBTAPI]
+depend: [ NBTAPI ]
 commands:
   utilities:
     usage: /utilites

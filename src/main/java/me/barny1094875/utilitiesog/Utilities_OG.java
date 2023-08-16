@@ -2,112 +2,126 @@
 // Authors: christianniehaus, NotAlexNoyle.
 package me.barny1094875.utilitiesog;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import me.barny1094875.utilitiesog.Commands.BuyCommand;
-// Import required libraries.
 import me.barny1094875.utilitiesog.Commands.UtilitiesCommand;
 import me.barny1094875.utilitiesog.Listeners.DisableEntityCramming;
 import me.barny1094875.utilitiesog.Listeners.DisablePhantomSpawns;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
+import java.io.IOException;
 
 public final class Utilities_OG extends JavaPlugin
 {
 
-	private File file;
-	private static Utilities_OG plugin;
-	private static final MiniMessage mm = MiniMessage.miniMessage();
-	private static FileConfiguration config;
-	private static File phantomDisabledPlayersFile;
-	private static YamlConfiguration phantomDisabledPlayers;
+    private File file;
+    private static Utilities_OG plugin;
+    private static final MiniMessage mm = MiniMessage.miniMessage();
+    private static FileConfiguration config;
+    private static File phantomDisabledPlayersFile;
+    private static YamlConfiguration phantomDisabledPlayers;
 
-	@Override
-	public void onEnable()
-	{
+    @Override
+    public void onEnable()
+    {
 
-		plugin = this;
+        plugin = this;
 
-		this.file = new File(this.getDataFolder(), "config.yml");
-		if (! this.file.exists())
-		{
-			this.saveDefaultConfig();
-		}
+        this.file = new File(this.getDataFolder(), "config.yml");
+        if (!this.file.exists())
+        {
+            this.saveDefaultConfig();
+        }
 
-		config = this.getConfig();
+        config = this.getConfig();
 
-		phantomDisabledPlayersFile = new File(this.getDataFolder(), "phantomDisabledUsers.yml");
-		try
-		{
-			if (! phantomDisabledPlayersFile.exists())
-			{
+        phantomDisabledPlayersFile = new File(this.getDataFolder(), "phantomDisabledUsers.yml");
+        try
+        {
+            if (!phantomDisabledPlayersFile.exists())
+            {
 
-				phantomDisabledPlayersFile.createNewFile();
+                phantomDisabledPlayersFile.createNewFile();
 
-			}
-		} catch (IOException e)
-		{
+            }
+        } catch (IOException e)
+        {
 
-			this.getLogger().severe("Something went wrong when creating the phantom toggle cache file!");
+            this.getLogger().severe("Something went wrong when creating the phantom toggle cache file!");
 
-		}
+        }
 
-		phantomDisabledPlayers = YamlConfiguration.loadConfiguration(phantomDisabledPlayersFile);
+        phantomDisabledPlayers = YamlConfiguration.loadConfiguration(phantomDisabledPlayersFile);
 
-		// Set up each feature here, using the config to enable only that which is desired,
-		// be sure to label, using comments, what each block is enabling.
+        // Set up each feature here, using the config to enable only that which is desired,
+        // be sure to label, using comments, what each block is enabling.
 
-		// Enable the Phantom Toggle Module.
-		if (this.getConfig().getBoolean("PhantomToggle"))
-		{
-			// Activate the Phantom Toggle Listener.
-			getServer().getPluginManager().registerEvents(new DisablePhantomSpawns(), this);
-		}
-		// Enable the Disable Entity Cramming Module.
-		if (this.getConfig().getBoolean("EntityCrammingDisable"))
-		{
-			// Activate the Entity Cramming Listener.
-			getServer().getPluginManager().registerEvents(new DisableEntityCramming(), this);
-		}
-		// Enable the Buy Menu Module.
-		if (this.getConfig().getBoolean("BuyMenu"))
-		{
-			// Register the /buy command.
-			this.getCommand("buy").setExecutor(new BuyCommand());
-		}
+        // Enable the Phantom Toggle Module.
+        if (this.getConfig().getBoolean("PhantomToggle"))
+        {
+            // Activate the Phantom Toggle Listener.
+            getServer().getPluginManager().registerEvents(new DisablePhantomSpawns(), this);
+        }
+        // Enable the Disable Entity Cramming Module.
+        if (this.getConfig().getBoolean("EntityCrammingDisable"))
+        {
+            // Activate the Entity Cramming Listener.
+            getServer().getPluginManager().registerEvents(new DisableEntityCramming(), this);
+        }
+        // Enable the Buy Menu Module.
+        if (this.getConfig().getBoolean("BuyMenu"))
+        {
+            // Register the /buy command.
+            this.getCommand("buy").setExecutor(new BuyCommand());
+        }
+        // Enable bamboo wood module
+        if (this.getConfig().getBoolean("BambooWood"))
+        {
+            ShapedRecipe BambooWood = new ShapedRecipe(new NamespacedKey(this, "Bamboo_Wood"),
+                    new ItemStack(Material.OAK_PLANKS))
+                    .shape("bb", "bb")
+                    .setIngredient('b', Material.BAMBOO);
+            Bukkit.addRecipe(BambooWood);
+        }
 
-		// Register the primary /utilities command.
-		this.getCommand("utilities").setExecutor(new UtilitiesCommand());
+        // Register the primary /utilities command.
+        {
+            this.getCommand("utilities").setExecutor(new UtilitiesCommand());
+        }
 
-	}
+    }
 
-	public static Utilities_OG getPlugin()
-	{
-		return plugin;
-	}
+    public static Utilities_OG getPlugin()
+    {
+        return plugin;
+    }
 
-	public static FileConfiguration config()
-	{
-		return config;
-	}
+    public static FileConfiguration config()
+    {
+        return config;
+    }
 
-	public static MiniMessage getMM()
-	{
-		return mm;
-	}
+    public static MiniMessage getMM()
+    {
+        return mm;
+    }
 
-	public static YamlConfiguration getPhantomDisabledPlayers()
-	{
-		return phantomDisabledPlayers;
-	}
+    public static YamlConfiguration getPhantomDisabledPlayers()
+    {
+        return phantomDisabledPlayers;
+    }
 
-	public static File getPhantomDisabledPlayersFile()
-	{
-		return phantomDisabledPlayersFile;
-	}
+    public static File getPhantomDisabledPlayersFile()
+    {
+        return phantomDisabledPlayersFile;
+    }
 
 }
