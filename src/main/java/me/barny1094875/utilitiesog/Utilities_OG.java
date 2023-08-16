@@ -5,8 +5,13 @@ package me.barny1094875.utilitiesog;
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.barny1094875.utilitiesog.Listeners.DisableEntityCramming;
@@ -36,7 +41,7 @@ public final class Utilities_OG extends JavaPlugin
 		plugin = this;
 
 		this.file = new File(this.getDataFolder(), "config.yml");
-		if (! this.file.exists())
+		if (!this.file.exists())
 		{
 			this.saveDefaultConfig();
 		}
@@ -46,7 +51,7 @@ public final class Utilities_OG extends JavaPlugin
 		phantomDisabledPlayersFile = new File(this.getDataFolder(), "phantomDisabledUsers.yml");
 		try
 		{
-			if (! phantomDisabledPlayersFile.exists())
+			if (!phantomDisabledPlayersFile.exists())
 			{
 
 				phantomDisabledPlayersFile.createNewFile();
@@ -61,11 +66,8 @@ public final class Utilities_OG extends JavaPlugin
 
 		phantomDisabledPlayers = YamlConfiguration.loadConfiguration(phantomDisabledPlayersFile);
 
-		// Register the /utilities command to display "about" information.
-		this.getCommand("utilities").setExecutor(new AboutModule());
-
 		// Set up each feature here, using the config to enable only that which is desired,
-		// Be sure to label, using comments, what each block is enabling.
+		// be sure to label, using comments, what each block is enabling.
 
 		// Enable the Phantom Toggle Module.
 		if (this.getConfig().getBoolean("PhantomToggle"))
@@ -97,6 +99,18 @@ public final class Utilities_OG extends JavaPlugin
 			// Enable the Bing command (replicates old /ping functionality).
 			this.getCommand("bing").setExecutor(new BingModule());
 		}
+		// Enable bamboo wood module
+		if (this.getConfig().getBoolean("BambooWood"))
+		{
+			ShapedRecipe BambooWood = new ShapedRecipe(new NamespacedKey(this, "Bamboo_Wood"),
+					new ItemStack(Material.OAK_PLANKS))
+					.shape("bb", "bb")
+					.setIngredient('b', Material.BAMBOO);
+			Bukkit.addRecipe(BambooWood);
+		}
+
+		// Register the primary /utilities command.
+		this.getCommand("utilities").setExecutor(new AboutModule());
 
 	}
 
