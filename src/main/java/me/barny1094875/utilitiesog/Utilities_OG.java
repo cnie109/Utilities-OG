@@ -9,11 +9,14 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.barny1094875.utilitiesog.Commands.BuyCommand;
-// Import required libraries.
-import me.barny1094875.utilitiesog.Commands.UtilitiesCommand;
 import me.barny1094875.utilitiesog.Listeners.DisableEntityCramming;
 import me.barny1094875.utilitiesog.Listeners.DisablePhantomSpawns;
+import me.barny1094875.utilitiesog.modules.AboutModule;
+import me.barny1094875.utilitiesog.modules.BingModule;
+import me.barny1094875.utilitiesog.modules.EntityCrammingToggleModule;
+import me.barny1094875.utilitiesog.modules.PhantomToggleModule;
+import me.barny1094875.utilitiesog.modules.PingModule;
+import me.barny1094875.utilitiesog.modules.RanksModule;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 
 public final class Utilities_OG extends JavaPlugin
@@ -58,31 +61,55 @@ public final class Utilities_OG extends JavaPlugin
 
 		phantomDisabledPlayers = YamlConfiguration.loadConfiguration(phantomDisabledPlayersFile);
 
+		// Register the /utilities command to display "about" information.
+		this.getCommand("utilities").setExecutor(new AboutModule());
+
 		// Set up each feature here, using the config to enable only that which is desired,
-		// be sure to label, using comments, what each block is enabling.
+		// Be sure to label, using comments, what each block is enabling.
 
 		// Enable the Phantom Toggle Module.
 		if (this.getConfig().getBoolean("PhantomToggle"))
 		{
 			// Activate the Phantom Toggle Listener.
 			getServer().getPluginManager().registerEvents(new DisablePhantomSpawns(), this);
+			// Activate the Phantom Toggle Command.
+			this.getCommand("togglephantoms").setExecutor(new PhantomToggleModule());
 		}
-		// Enable the Disable Entity Cramming Module.
+		// Enable the Entity Cramming Toggle Module.
 		if (this.getConfig().getBoolean("EntityCrammingDisable"))
 		{
-			// Activate the Entity Cramming Listener.
+			// Activate the Entity Cramming Toggle Listener.
 			getServer().getPluginManager().registerEvents(new DisableEntityCramming(), this);
+			// Activate the Entity Cramming Toggle Command.
+			this.getCommand("togglecramming").setExecutor(new EntityCrammingToggleModule());
 		}
-		// Enable the Buy Menu Module.
-		if (this.getConfig().getBoolean("BuyMenu"))
+		// Enable the Ranks Module.
+		if (this.getConfig().getBoolean("RanksMenu"))
 		{
-			// Register the /buy command.
-			this.getCommand("buy").setExecutor(new BuyCommand());
+			// Activate the Ranks Command.
+			this.getCommand("ranks").setExecutor(new RanksModule());
+		}
+		// Enable the Ping Module.
+		if (this.getConfig().getBoolean("Ping"))
+		{
+			// Enable the Ping command.
+			this.getCommand("ping").setExecutor(new PingModule());
+			// Enable the Bing command (replicates old /ping functionality).
+			this.getCommand("bing").setExecutor(new BingModule());
 		}
 
-		// Register the primary /utilities command.
-		this.getCommand("utilities").setExecutor(new UtilitiesCommand());
+	}
 
+	// Rank menu API.
+	public RanksModule ranksCommand()
+	{
+		return new RanksModule();
+	}
+
+	// Ping API.
+	public PingModule pingCommand()
+	{
+		return new PingModule();
 	}
 
 	public static Utilities_OG getPlugin()

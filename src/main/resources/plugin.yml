@@ -1,15 +1,33 @@
 name: Utilities-OG
-authors: [christianniehaus, NotAlexNoyle]
-version: '1.1'
+authors: [ christianniehaus, NotAlexNoyle ]
+version: '1.3'
 main: me.barny1094875.utilitiesog.Utilities_OG
 api-version: 1.18
 depend: [NBTAPI]
 commands:
   utilities:
     usage: /utilites
-  buy:
-    usage: /buy
+  togglephantoms:
+    usage: /togglephantoms
+  togglecramming:
+    usage: /togglecramming
+  ranks:
+    usage: /ranks
+  ping:
+    usage: /ping
+  bing:
+    usage: /bing
 
 permissions:
-  util.candisablecramming:
+  utilities.togglephantoms:
+    description: Permission to use the /togglephantoms command.
+    default: op
+  utilities.togglecramming:
+    description: Permission to use the /togglecramming command.
+    default: op
+  utilities.ranks:
+    description: Permission to use the /ranks command.
+    default: op
+  utilities.ping:
+    description: Permission to use the /ping and /bing commands.
     default: op
