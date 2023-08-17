@@ -2,18 +2,8 @@
 // Authors: christianniehaus, NotAlexNoyle.
 package me.barny1094875.utilitiesog;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.plugin.java.JavaPlugin;
-
+import me.barny1094875.utilitiesog.Commands.BuyCommand;
+import me.barny1094875.utilitiesog.Commands.UtilitiesCommand;
 import me.barny1094875.utilitiesog.Listeners.DisableEntityCramming;
 import me.barny1094875.utilitiesog.Listeners.DisablePhantomSpawns;
 import me.barny1094875.utilitiesog.modules.AboutModule;
@@ -23,6 +13,17 @@ import me.barny1094875.utilitiesog.modules.PhantomToggleModule;
 import me.barny1094875.utilitiesog.modules.PingModule;
 import me.barny1094875.utilitiesog.modules.RanksModule;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
+import java.io.IOException;
 
 public final class Utilities_OG extends JavaPlugin
 {
