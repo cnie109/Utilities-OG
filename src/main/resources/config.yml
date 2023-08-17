@@ -1,6 +1,9 @@
 # area for all of the feature enabling/disabling
 PhantomToggle: true
 EntityCrammingDisable: false
+RanksMenu: true
+BambooWood: true
+Ping: true
 BuyMenu: true
 BambooWood: true
 

@@ -2,8 +2,6 @@
 // Authors: christianniehaus, NotAlexNoyle.
 package me.barny1094875.utilitiesog.Listeners;
 
-// Import required libraries.
-import me.barny1094875.utilitiesog.Utilities_OG;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
@@ -11,6 +9,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+
+// Import required libraries.
+import me.barny1094875.utilitiesog.Utilities_OG;
 
 public class DisablePhantomSpawns implements Listener
 {

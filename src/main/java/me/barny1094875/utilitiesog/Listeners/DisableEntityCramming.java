@@ -2,12 +2,13 @@
 // Authors: christianniehaus, NotAlexNoyle.
 package me.barny1094875.utilitiesog.Listeners;
 
-// Import required libraries.
-import me.barny1094875.utilitiesog.Utilities_OG;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+
+// Import required libraries.
+import me.barny1094875.utilitiesog.Utilities_OG;
 
 public class DisableEntityCramming implements Listener {
 
