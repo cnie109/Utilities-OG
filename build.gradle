@@ -59,3 +59,14 @@ processResources {
         expand props
     }
 }
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'me.barny1094875'
+            artifactId = 'utilities-og'
+            version = '1.3'
+            from components.java
+        }
+    }
+}
