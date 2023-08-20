@@ -59,14 +59,3 @@ processResources {
         expand props
     }
 }
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = project.group.toString()
-            artifactId = project.name.toLowerCase()
-            version = project.version
-            from components.java
-        }
-    }
-}
