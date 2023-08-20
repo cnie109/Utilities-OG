@@ -27,8 +27,8 @@ public final class Utilities_OG extends JavaPlugin
     private static Utilities_OG plugin;
     private static final MiniMessage mm = MiniMessage.miniMessage();
     private static FileConfiguration config;
-    private static File phantomDisabledPlayersFile;
-    private static YamlConfiguration phantomDisabledPlayers;
+    private static File phantomPreferencesFile;
+    private static YamlConfiguration phantomPreferences;
 
     @Override
     public void onEnable()
@@ -44,13 +44,13 @@ public final class Utilities_OG extends JavaPlugin
 
         config = this.getConfig();
 
-        phantomDisabledPlayersFile = new File(this.getDataFolder(), "phantomDisabledUsers.yml");
+        phantomPreferencesFile = new File(this.getDataFolder(), "phantomDisabledUsers.yml");
         try
         {
-            if (!phantomDisabledPlayersFile.exists())
+            if (! phantomPreferencesFile.exists())
             {
 
-                phantomDisabledPlayersFile.createNewFile();
+            	phantomPreferencesFile.createNewFile();
 
             }
         } catch (IOException e)
@@ -60,7 +60,7 @@ public final class Utilities_OG extends JavaPlugin
 
         }
 
-        phantomDisabledPlayers = YamlConfiguration.loadConfiguration(phantomDisabledPlayersFile);
+        phantomPreferences = YamlConfiguration.loadConfiguration(phantomPreferencesFile);
 
         // Set up each feature here, using the config to enable only that which is desired,
         // be sure to label, using comments, what each block is enabling.
@@ -141,14 +141,14 @@ public final class Utilities_OG extends JavaPlugin
         return mm;
     }
 
-    public static YamlConfiguration getPhantomDisabledPlayers()
+    public static YamlConfiguration getPhantomPreferences()
     {
-        return phantomDisabledPlayers;
+        return phantomPreferences;
     }
 
     public static File getPhantomDisabledPlayersFile()
     {
-        return phantomDisabledPlayersFile;
+        return phantomPreferencesFile;
     }
 
 }

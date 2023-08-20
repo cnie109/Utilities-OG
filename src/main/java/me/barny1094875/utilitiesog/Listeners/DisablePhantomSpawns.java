@@ -24,17 +24,16 @@ public class DisablePhantomSpawns implements Listener
 		if (event.getEntityType().equals(EntityType.PHANTOM))
 		{
 			// Store the contents of phantomDisabledUsers.yml file as a YAML object.
-			YamlConfiguration phantomDisabledPlayers = Utilities_OG.getPhantomDisabledPlayers();
+			YamlConfiguration phantomsAreDisabled = Utilities_OG.getPhantomPreferences();
 			for (Player player : Bukkit.getServer().getOnlinePlayers())
 			{
 				// Check if the player has disabled phantom spawns.
-				if (phantomDisabledPlayers.getBoolean(player.getUniqueId().toString()))
+				if (phantomsAreDisabled.getBoolean(player.getUniqueId().toString()))
 				{
 					// Check if the phantom is close enough to the player to count as their spawn.
 					if (event.getEntity().getLocation().distance(player.getLocation()) < 48)
 					{
 						event.setCancelled(true);
-						break;
 					}
 				}
 			}

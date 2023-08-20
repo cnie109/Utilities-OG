@@ -1,6 +1,6 @@
 name: Utilities-OG
 authors: [ christianniehaus, NotAlexNoyle ]
-version: '1.3'
+version: '1.3.2'
 main: me.barny1094875.utilitiesog.Utilities_OG
 api-version: 1.18
 depend: [ NBTAPI ]
