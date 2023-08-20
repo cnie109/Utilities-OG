@@ -23,7 +23,6 @@ public class DisablePhantomSpawns implements Listener
 		// If the mob that spawned is a phantom, do this...
 		if (event.getEntityType().equals(EntityType.PHANTOM))
 		{
-			Utilities_OG.getPlugin().getLogger().info("A phantom has spawned.");
 			// Store the contents of phantomDisabledUsers.yml file as a YAML object.
 			YamlConfiguration phantomsAreDisabled = Utilities_OG.getPhantomPreferences();
 			for (Player player : Bukkit.getServer().getOnlinePlayers())
@@ -35,11 +34,7 @@ public class DisablePhantomSpawns implements Listener
 					if (event.getEntity().getLocation().distance(player.getLocation()) < 48)
 					{
 						event.setCancelled(true);
-						Utilities_OG.getPlugin().getLogger().info("A phantom spawning was cancelled.");
 					}
-				}
-				else {
-					Utilities_OG.getPlugin().getLogger().info("A phantom spawning was not cancelled.");
 				}
 			}
 		}

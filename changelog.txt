@@ -1,4 +1,12 @@
-1.3:
+**1.3.2**:
+- Refactor phantom toggle logic.
+- Enable phantom spawning by default.
+- Fix Jitpack build.
+
+**1.3.1:**
+- Make bamboo wood named bamboo wood.
+
+**1.3:**
 
 - Added new /ping command. Supports ping lookup for self and others.
 - Added /bing command to replicate the functionality of the old /ping command.
@@ -7,11 +15,11 @@
 - New per-command permissions (described in README.md).
 - Added ranks menu and ping API.
 
-1.2:
+**1.2:**
 
 - Add "bamboo" wood recipe.
 
-1.1:
+**1.1:**
 
 - Added about message.
 - Fixed NullPointerException.
