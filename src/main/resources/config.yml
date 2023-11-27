@@ -1,11 +1,12 @@
 # area for all of the feature enabling/disabling
-PhantomToggle: true
-EntityCrammingDisable: false
-RanksMenu: true
-Ping: true
-BuyMenu: true
-BambooWood: true
+PhantomToggle : true
+EntityCrammingDisable : false
+RanksMenu : true
+Ping : true
+BuyMenu : true
+BambooWood : true
 
 # all of the below are config used by the plugin
 # whether to disable entity cramming or not
-doEntityCramming: false
+doEntityCramming : false
+chainmailArmorRecipeEnabled : true

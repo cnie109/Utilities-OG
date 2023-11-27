@@ -111,6 +111,37 @@ public final class Utilities_OG extends JavaPlugin
 
         // Register the primary /utilities command.
         this.getCommand("utilities").setExecutor(new AboutModule());
+        //chainmail armor recipe
+        if(this.getConfig().getBoolean("chainmailArmorRecipeEnabled")) {
+            ShapedRecipe ChainHelmet1 = new ShapedRecipe(new NamespacedKey(this, "Chainmail_Helmet1"),
+                    new ItemStack(Material.CHAINMAIL_HELMET))
+                    .shape("ccc", "c c")
+                    .setIngredient('c', Material.CHAIN);
+            Bukkit.addRecipe(ChainHelmet1);
+
+            // recipe for chain chestplate
+            ShapedRecipe ChainChestPlate = new ShapedRecipe(new NamespacedKey(this, "Chainmail_Chestplate"),
+                    new ItemStack(Material.CHAINMAIL_CHESTPLATE))
+                    .shape("c c", "ccc", "ccc")
+                    .setIngredient('c', Material.CHAIN);
+            Bukkit.addRecipe(ChainChestPlate);
+
+            // recipe for chain leggings
+            ShapedRecipe ChainLeggings = new ShapedRecipe(new NamespacedKey(this, "Chainmail_Leggings"),
+                    new ItemStack(Material.CHAINMAIL_LEGGINGS))
+                    .shape("ccc", "c c", "c c")
+                    .setIngredient('c', Material.CHAIN);
+            Bukkit.addRecipe(ChainLeggings);
+
+            // recipe for chain boots
+            ShapedRecipe ChainBoots1 = new ShapedRecipe(new NamespacedKey(this, "Chainmail_Boots1"),
+                    new ItemStack(Material.CHAINMAIL_BOOTS))
+                    .shape("c c", "c c")
+                    .setIngredient('c', Material.CHAIN);
+            Bukkit.addRecipe(ChainBoots1);
+        }
+
+
 
     }
 
