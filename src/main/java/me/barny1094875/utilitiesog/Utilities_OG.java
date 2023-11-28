@@ -5,23 +5,15 @@ package me.barny1094875.utilitiesog;
 import me.barny1094875.utilitiesog.Listeners.DisableEntityCramming;
 import me.barny1094875.utilitiesog.Listeners.DisablePhantomSpawns;
 import me.barny1094875.utilitiesog.modules.*;
-import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
 
-public final class Utilities_OG extends JavaPlugin
-{
+public final class Utilities_OG extends JavaPlugin {
 
     private File file;
     private static Utilities_OG plugin;
@@ -31,30 +23,25 @@ public final class Utilities_OG extends JavaPlugin
     private static YamlConfiguration phantomPreferences;
 
     @Override
-    public void onEnable()
-    {
+    public void onEnable() {
 
         plugin = this;
 
         this.file = new File(this.getDataFolder(), "config.yml");
-        if (!this.file.exists())
-        {
+        if (!this.file.exists()) {
             this.saveDefaultConfig();
         }
 
         config = this.getConfig();
 
         phantomPreferencesFile = new File(this.getDataFolder(), "phantomDisabledUsers.yml");
-        try
-        {
-            if (! phantomPreferencesFile.exists())
-            {
+        try {
+            if (!phantomPreferencesFile.exists()) {
 
-            	phantomPreferencesFile.createNewFile();
+                phantomPreferencesFile.createNewFile();
 
             }
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
 
             this.getLogger().severe("Something went wrong when creating the phantom toggle cache file!");
 
@@ -66,47 +53,38 @@ public final class Utilities_OG extends JavaPlugin
         // be sure to label, using comments, what each block is enabling.
 
         // Enable the Phantom Toggle Module.
-        if (this.getConfig().getBoolean("PhantomToggle"))
-        {
+        if (this.getConfig().getBoolean("PhantomToggle")) {
             // Activate the Phantom Toggle Listener.
             getServer().getPluginManager().registerEvents(new DisablePhantomSpawns(), this);
             // Activate the Phantom Toggle Command.
             this.getCommand("togglephantoms").setExecutor(new PhantomToggleModule());
         }
         // Enable the Entity Cramming Toggle Module.
-        if (this.getConfig().getBoolean("EntityCrammingDisable"))
-        {
+        if (this.getConfig().getBoolean("EntityCrammingDisable")) {
             // Activate the Entity Cramming Toggle Listener.
             getServer().getPluginManager().registerEvents(new DisableEntityCramming(), this);
             // Activate the Entity Cramming Toggle Command.
             this.getCommand("togglecramming").setExecutor(new EntityCrammingToggleModule());
         }
         // Enable the Ranks Module.
-        if (this.getConfig().getBoolean("RanksMenu"))
-        {
+        if (this.getConfig().getBoolean("RanksMenu")) {
             // Activate the Ranks Command.
             this.getCommand("ranks").setExecutor(new RanksModule());
         }
         // Enable the Ping Module.
-        if (this.getConfig().getBoolean("Ping"))
-        {
+        if (this.getConfig().getBoolean("Ping")) {
             // Enable the Ping command.
             this.getCommand("ping").setExecutor(new PingModule());
             // Enable the Bing command (replicates old /ping functionality).
             this.getCommand("bing").setExecutor(new BingModule());
         }
         // Enable bamboo wood module
-        if (this.getConfig().getBoolean("BambooWood"))
-        {
-            ItemStack bambooWood = new ItemStack(Material.OAK_PLANKS);
-            ItemMeta bambooWoodMeta = bambooWood.getItemMeta();
-            bambooWoodMeta.displayName(mm.deserialize("Bamboo Wood").decoration(TextDecoration.ITALIC, false));
-            bambooWood.setItemMeta(bambooWoodMeta);
-            ShapedRecipe BambooWood = new ShapedRecipe(new NamespacedKey(this, "Bamboo_Wood"),
-                    bambooWood)
-                    .shape("bb", "bb")
-                    .setIngredient('b', Material.BAMBOO);
-            Bukkit.addRecipe(BambooWood);
+        if (this.getConfig().getBoolean("BambooWood")) {
+            BambooWood.Enable();
+        }
+        // Enable chain armour module
+        if (this.getConfig().getBoolean("ChainArmour")) {
+            ChainArmour.Enable();
         }
 
         // Register the primary /utilities command.
@@ -115,39 +93,32 @@ public final class Utilities_OG extends JavaPlugin
     }
 
     // Rank menu API.
-    public RanksModule ranksCommand()
-    {
+    public RanksModule ranksCommand() {
         return new RanksModule();
     }
 
     // Ping API.
-    public PingModule pingCommand()
-    {
+    public PingModule pingCommand() {
         return new PingModule();
     }
 
-    public static Utilities_OG getPlugin()
-    {
+    public static Utilities_OG getPlugin() {
         return plugin;
     }
 
-    public static FileConfiguration config()
-    {
+    public static FileConfiguration config() {
         return config;
     }
 
-    public static MiniMessage getMM()
-    {
+    public static MiniMessage getMM() {
         return mm;
     }
 
-    public static YamlConfiguration getPhantomPreferences()
-    {
+    public static YamlConfiguration getPhantomPreferences() {
         return phantomPreferences;
     }
 
-    public static File getPhantomDisabledPlayersFile()
-    {
+    public static File getPhantomDisabledPlayersFile() {
         return phantomPreferencesFile;
     }
 
