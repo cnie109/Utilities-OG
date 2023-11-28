@@ -3,6 +3,7 @@ authors: [ christianniehaus, NotAlexNoyle ]
 version: '2.1'
 main: me.barny1094875.utilitiesog.Utilities_OG
 api-version: 1.19
+depend: [ WorldGuard ]
 commands:
   utilities:
     usage: /utilites
