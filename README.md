@@ -34,3 +34,11 @@ Allows crafting of bamboo wood prior to 1.20
 - Chainmail Armour
 
 Allows the crafting of chainmail armour with chains
+
+- NoFlippy
+
+Plugin made my NotAlexNoyle that has been merged in here. Prevents trapdoors being flipped in certain regions by certain groups
+
+- ColorCodes
+
+Antoher of NotAlexNoyle's plugins merged here. Reveals bukkit's color codes for chat formatting
