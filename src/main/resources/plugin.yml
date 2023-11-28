@@ -1,9 +1,8 @@
 name: Utilities-OG
 authors: [ christianniehaus, NotAlexNoyle ]
-version: '2.0'
+version: '2.1'
 main: me.barny1094875.utilitiesog.Utilities_OG
 api-version: 1.19
-depend: [ NBTAPI ]
 commands:
   utilities:
     usage: /utilites
@@ -17,6 +16,8 @@ commands:
     usage: /ping
   bing:
     usage: /bing
+  colorcodes:
+    usage: /colorcodes
 
 permissions:
   utilities.togglephantoms:

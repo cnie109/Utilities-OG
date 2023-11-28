@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'me.barny1094875'
-version = '2.0'
+version = '2.1'
 
 repositories {
 
@@ -24,11 +24,19 @@ repositories {
 
     }
 
+    maven {
+
+        name 'enginehub-repo' // Declare a name for the EngineHub repository.
+        url 'https://maven.enginehub.org/repo/' // Import EngineHub repository for WorldGuard API.
+
+    }
+
 }
 
 dependencies {
 
-    compileOnly "org.purpurmc.purpur:purpur-api:1.19.4-R0.1-SNAPSHOT" // Declare purpur API version to be packaged.
+    compileOnly "org.purpurmc.purpur:purpur-api:1.18.2-R0.1-SNAPSHOT" // Declare purpur API version to be packaged.
+    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.8'
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.11.2")
     implementation "net.kyori:adventure-text-minimessage:4.13.1"
 

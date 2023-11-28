@@ -6,6 +6,8 @@ Ping: true
 BuyMenu: true
 BambooWood: true
 ChainArmour: true
+ColorCodes: true
+NoFlippy: true
 
 # all of the below are config used by the plugin
 # whether to disable entity cramming or not
