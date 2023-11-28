@@ -26,3 +26,11 @@ Use /utilities ranks to show the TrueOG store menu.
 Use /utilities ping to show your own ping, or /utilities ping <player> to show someone else's.
 Also includes /bing which replicates the functionality of the default /ping in minecraft.
 *Requires utilities.ping permission.*
+
+- Bamboo Wood
+
+Allows crafting of bamboo wood prior to 1.20
+
+- Chainmail Armour
+
+Allows the crafting of chainmail armour with chains
