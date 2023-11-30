@@ -1,7 +1,6 @@
 package me.barny1094875.utilitiesog.modules;
 
 import me.barny1094875.utilitiesog.Utilities_OG;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -48,7 +47,7 @@ public class ColorCodes implements CommandExecutor {
             else {
 
                 // Deny console executions.
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "ERROR: The console cannot execute this command!"));
+                sender.sendMessage("ERROR: The console cannot execute this command!");
 
             }
 
