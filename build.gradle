@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'me.barny1094875'
-version = '2.1'
+version = '2.1.2'
 
 repositories {
 
