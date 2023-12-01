@@ -47,7 +47,7 @@ Allows the crafting of chainmail armour with chains
 
 - NoFlippy
 
-Plugin made my NotAlexNoyle that has been merged in here. Prevents trapdoors being flipped in certain regions by certain groups
+Plugin made by NotAlexNoyle that has been merged in here. Prevents trapdoors being flipped in certain regions by certain groups
 
 - ColorCodes
 
