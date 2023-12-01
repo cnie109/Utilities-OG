@@ -1,5 +1,15 @@
 # Utilities-OG
 
+Current Target: Purpur 1.19.4
+
+Authors: Barny1094875.
+
+<h3>To build:</h3>
+
+./gradlew build
+
+The resulting .jar file will be in build/libs
+
 This plugin houses various little tweaks used by the TrueOG Minecraft server.
 
 At the moment, any config change requires a server restart to take effect.
@@ -41,4 +51,4 @@ Plugin made my NotAlexNoyle that has been merged in here. Prevents trapdoors bei
 
 - ColorCodes
 
-Antoher of NotAlexNoyle's plugins merged here. Reveals bukkit's color codes for chat formatting
+Another of NotAlexNoyle's plugins merged here. Reveals bukkit's color codes for chat formatting
