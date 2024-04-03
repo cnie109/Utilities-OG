@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import me.barny1094875.utilitiesog.Utilities_OG;
+import me.barny1094875.utilitiesog.UtilitiesOG;
 import net.kyori.adventure.text.Component;
 
 // Initialize command manager class.
@@ -34,7 +34,7 @@ public class PingModule implements CommandExecutor
 				if(args.length == 0) {
 
 					// Send player their own ping using a formatted message with the MiniMessage API.
-					Component parsed = Utilities_OG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#00AA00>Your current ping is: <#FFAA00>" + player.getPing() + "<#00AA00>.");
+					Component parsed = UtilitiesOG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#00AA00>Your current ping is: <#FFAA00>" + player.getPing() + "<#00AA00>.");
 					player.sendMessage(parsed);
 
 				}
@@ -48,7 +48,7 @@ public class PingModule implements CommandExecutor
 					if(target != null) {
 
 						// Send player their specified player's ping using formatting with the MiniMessage API.
-						Component parsed = Utilities_OG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#00AA00>" + target.getName() + "'s current ping is: <#FFAA00>" + target.getPing() + "<#00AA00>.");
+						Component parsed = UtilitiesOG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#00AA00>" + target.getName() + "'s current ping is: <#FFAA00>" + target.getPing() + "<#00AA00>.");
 						player.sendMessage(parsed);
 
 					}
@@ -56,7 +56,7 @@ public class PingModule implements CommandExecutor
 					else {
 
 						// Send a "player not found" error message using formatting with the MiniMessage API.
-						Component parsed = Utilities_OG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#AA0000> ERROR: The player " + args[0] + " was not found!");
+						Component parsed = UtilitiesOG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#AA0000> ERROR: The player " + args[0] + " was not found!");
 						player.sendMessage(parsed);
 
 					}
@@ -66,7 +66,7 @@ public class PingModule implements CommandExecutor
 				else {
 
 					// Send a "too many arguments" error message using formatting with the MiniMessage API.
-					Component parsed = Utilities_OG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#AA0000> ERROR: Too many arguments provided. Syntax: <#FFFF55>/ping <player>");
+					Component parsed = UtilitiesOG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#AA0000> ERROR: Too many arguments provided. Syntax: <#FFFF55>/ping <player>");
 					player.sendMessage(parsed);
 
 				}

@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import me.barny1094875.utilitiesog.Utilities_OG;
+import me.barny1094875.utilitiesog.UtilitiesOG;
 import net.kyori.adventure.text.Component;
 
 // Initialize command manager class.
@@ -25,7 +25,7 @@ public class BingModule implements CommandExecutor
 			Player player = (Player) sender;
 
 			// Send player a connection confirmation message.
-			Component parsed = Utilities_OG.getMM().deserialize("<#FFFFFF> Bong!");
+			Component parsed = UtilitiesOG.getMM().deserialize("<#FFFFFF> Bong!");
 			player.sendMessage(parsed);
 		}
 		// Healthy exit status.
