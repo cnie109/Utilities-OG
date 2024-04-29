@@ -19,10 +19,10 @@ import org.bukkit.scheduler.BukkitTask;
 import java.io.File;
 import java.io.IOException;
 
-public final class Utilities_OG extends JavaPlugin {
+public final class UtilitiesOG extends JavaPlugin {
 
     private File file;
-    private static Utilities_OG plugin;
+    private static UtilitiesOG plugin;
     private static final MiniMessage mm = MiniMessage.miniMessage();
     private static FileConfiguration config;
     private static File phantomPreferencesFile;
@@ -155,7 +155,7 @@ public final class Utilities_OG extends JavaPlugin {
         return new PingModule();
     }
 
-    public static Utilities_OG getPlugin() {
+    public static UtilitiesOG getPlugin() {
         return plugin;
     }
 

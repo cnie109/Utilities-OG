@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 // Import required libraries.
-import me.barny1094875.utilitiesog.Utilities_OG;
+import me.barny1094875.utilitiesog.UtilitiesOG;
 import net.kyori.adventure.text.Component;
 
 public class PhantomToggleModule implements CommandExecutor
@@ -29,7 +29,7 @@ public class PhantomToggleModule implements CommandExecutor
 			if (player.hasPermission("utilities.togglephantoms"))
 			{
 				// Store the contents of phantomDisabledUsers.yml file as a YAML object.
-				YamlConfiguration phantomPreferences = Utilities_OG.getPhantomPreferences();
+				YamlConfiguration phantomPreferences = UtilitiesOG.getPhantomPreferences();
 
 				// Cherry pick the command runner's phantom status from the YAML data set.
 				boolean phantomToggleState = phantomPreferences.getBoolean(player.getUniqueId().toString());
@@ -41,21 +41,21 @@ public class PhantomToggleModule implements CommandExecutor
 				if (phantomToggleState)
 				{
 					// Send formatted "true" message using MiniMessage API.
-					Component parsed = Utilities_OG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#55FF55>Phantom spawning turned <#00AA00>ON<#55FF55>.");
+					Component parsed = UtilitiesOG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#55FF55>Phantom spawning turned <#00AA00>ON<#55FF55>.");
 					player.sendMessage(parsed);
 				}
 				// If the command sender's phantom spawning is turned off, do this...
 				else
 				{
 					// Send formatted "false" message using MiniMessage API.
-					Component parsed = Utilities_OG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#FFAA00>Phantom spawning turned <#FF5555>OFF<#FFAA00>.");
+					Component parsed = UtilitiesOG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#FFAA00>Phantom spawning turned <#FF5555>OFF<#FFAA00>.");
 					player.sendMessage(parsed);	
 				}
 
 				try
 				{
 					// Save changes to YAML data to disk.
-					phantomPreferences.save(Utilities_OG.getPhantomDisabledPlayersFile());
+					phantomPreferences.save(UtilitiesOG.getPhantomDisabledPlayersFile());
 				}
 				catch (IOException error)
 				{

@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import me.barny1094875.utilitiesog.Utilities_OG;
+import me.barny1094875.utilitiesog.UtilitiesOG;
 import net.kyori.adventure.text.Component;
 
 public class AboutModule implements CommandExecutor
@@ -23,7 +23,7 @@ public class AboutModule implements CommandExecutor
 			Player player = (Player) sender;
 
 			// Send formatted about message using MiniMessage API.
-			Component parsed = Utilities_OG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#FFAA00>A collection of small utilities used by <#00AA00>True<#AA0000>OG<#FFAA00> <#FFFF55>Network<#FFAA00>. Developed by <#FFFF55>christianniehaus <#FFAA00>& <#FFFF55>NotAlexNoyle<#FFAA00>.");
+			Component parsed = UtilitiesOG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#FFAA00>A collection of small utilities used by <#00AA00>True<#AA0000>OG<#FFAA00> <#FFFF55>Network<#FFAA00>. Developed by <#FFFF55>christianniehaus <#FFAA00>& <#FFFF55>NotAlexNoyle<#FFAA00>.");
 			player.sendMessage(parsed);
 		}
 		else

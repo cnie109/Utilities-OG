@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 // Import required libraries.
-import me.barny1094875.utilitiesog.Utilities_OG;
+import me.barny1094875.utilitiesog.UtilitiesOG;
 
 public class DisableEntityCramming implements Listener {
 
@@ -20,7 +20,7 @@ public class DisableEntityCramming implements Listener {
 		if(event.getCause().equals(DamageCause.CRAMMING)) {
 
 			// If disabling entity cramming is set to "true" in config.yml, do this...
-			if(Utilities_OG.config().getBoolean("disableEntityCramming")) {
+			if(UtilitiesOG.config().getBoolean("disableEntityCramming")) {
 
 				event.setCancelled(true);
 

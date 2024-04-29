@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 //Import required libraries.
-import me.barny1094875.utilitiesog.Utilities_OG;
+import me.barny1094875.utilitiesog.UtilitiesOG;
 import net.kyori.adventure.text.Component;
 
 public class EntityCrammingToggleModule implements CommandExecutor
@@ -27,13 +27,13 @@ public class EntityCrammingToggleModule implements CommandExecutor
 			if (player.hasPermission("utilities.togglecramming"))
 			{
 				// Fetch config file from data folder.  
-				FileConfiguration config = Utilities_OG.getPlugin().getConfig();
+				FileConfiguration config = UtilitiesOG.getPlugin().getConfig();
 
 				// Flip the true/false value to the opposite of what it currently is.
 				config.set("doEntityCramming", ! config.getBoolean("doEntityCramming"));
 
 				// Send formatted confirmation message using MiniMessage API.
-				Component parsed = Utilities_OG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#FFAA00>Entity cramming has been set to <#FFFF55>" + config.getBoolean("doEntityCramming") + "<#FFAA00>.");
+				Component parsed = UtilitiesOG.getMM().deserialize("<#AAAAAA>[<#00AA00>Utilities<#AA0000>-OG<#AAAAAA>] <#FFAA00>Entity cramming has been set to <#FFFF55>" + config.getBoolean("doEntityCramming") + "<#FFAA00>.");
 				player.sendMessage(parsed);
 			}
 		}

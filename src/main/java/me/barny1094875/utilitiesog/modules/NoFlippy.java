@@ -6,7 +6,7 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
-import me.barny1094875.utilitiesog.Utilities_OG;
+import me.barny1094875.utilitiesog.UtilitiesOG;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -68,7 +68,7 @@ public class NoFlippy implements Listener {
                     ApplicableRegionSet set = query.getApplicableRegions(blockLocation);
 
                     // If the Flippy Flag is set to DENY, cancel the event.
-                    if (!set.testState(null, Utilities_OG.getFlippyFlag())) {
+                    if (!set.testState(null, UtilitiesOG.getFlippyFlag())) {
 
                         // Cancel the trapdoor flip.
                         event.setCancelled(true);

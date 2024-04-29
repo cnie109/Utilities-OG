@@ -2,7 +2,7 @@
 // Authors: christianniehaus, NotAlexNoyle.
 package me.barny1094875.utilitiesog.Listeners;
 
-import me.barny1094875.utilitiesog.Utilities_OG;
+import me.barny1094875.utilitiesog.UtilitiesOG;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
@@ -19,7 +19,7 @@ public class DisablePhantomSpawns implements Listener {
         // If the mob that spawned is a phantom, do this...
         if (event.getEntityType().equals(EntityType.PHANTOM)) {
             // Store the contents of phantomDisabledUsers.yml file as a YAML object.
-            YamlConfiguration phantomsAreDisabled = Utilities_OG.getPhantomPreferences();
+            YamlConfiguration phantomsAreDisabled = UtilitiesOG.getPhantomPreferences();
             // get every player currently on the server in the world that the phantom spawned
             for (Player player : Bukkit.getServer().getOnlinePlayers()
                     .stream()
