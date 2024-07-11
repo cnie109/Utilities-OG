@@ -1,3 +1,7 @@
+**1.3.3:**
+
+- Update gradle build.
+
 **1.3.2**:
 - Refactor phantom toggle logic.
 - Enable phantom spawning by default.
