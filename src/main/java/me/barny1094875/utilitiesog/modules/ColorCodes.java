@@ -42,6 +42,8 @@ public class ColorCodes implements CommandExecutor {
                 player.sendMessage(UtilitiesOG.getMM().deserialize("&k = <obfuscated>Magic               <reset> &l = <bold>Bold"));
                 player.sendMessage(UtilitiesOG.getMM().deserialize("&m = <strikethrough>Strikethrough <reset>    &n = <underlined>Underline"));
                 player.sendMessage(UtilitiesOG.getMM().deserialize("&o = <italic>Italic               <reset> &r = Reset"));
+                MiniPlaceholderAPI.sendMessageWithPlaceholders(player, "Your name is: <player_displayname>");
+                
             }
             // If the command executor is not a player, do this...
             else {

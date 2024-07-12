@@ -52,6 +52,7 @@ dependencies {
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.8") // Import WorldGuard API.
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.11.2") // Import NBT API.
     compileOnly("io.github.miniplaceholders:miniplaceholders-api:2.2.3") // Import MiniPlaceholders API.
+    compileOnly("io.github.miniplaceholders:miniplaceholders-kotlin-ext:2.2.3") // Import MiniPlaceholders API helper.
 }
 
 tasks.withType<AbstractArchiveTask>().configureEach {

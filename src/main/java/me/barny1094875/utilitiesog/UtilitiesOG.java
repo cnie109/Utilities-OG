@@ -2,22 +2,34 @@
 // Authors: christianniehaus, NotAlexNoyle.
 package me.barny1094875.utilitiesog;
 
-import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.protection.flags.Flag;
-import com.sk89q.worldguard.protection.flags.StateFlag;
-import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
-import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
-import me.barny1094875.utilitiesog.Listeners.DisableEntityCramming;
-import me.barny1094875.utilitiesog.Listeners.DisablePhantomSpawns;
-import me.barny1094875.utilitiesog.modules.*;
-import net.kyori.adventure.text.minimessage.MiniMessage;
+import java.io.File;
+import java.io.IOException;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.io.File;
-import java.io.IOException;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.flags.Flag;
+import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
+import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
+
+import me.barny1094875.utilitiesog.Listeners.DisableEntityCramming;
+import me.barny1094875.utilitiesog.Listeners.DisablePhantomSpawns;
+import me.barny1094875.utilitiesog.modules.AboutModule;
+import me.barny1094875.utilitiesog.modules.BambooWood;
+import me.barny1094875.utilitiesog.modules.BingModule;
+import me.barny1094875.utilitiesog.modules.ChainArmour;
+import me.barny1094875.utilitiesog.modules.ColorCodes;
+import me.barny1094875.utilitiesog.modules.EntityCrammingToggleModule;
+import me.barny1094875.utilitiesog.modules.MiniPlaceholderAPI;
+import me.barny1094875.utilitiesog.modules.NoFlippy;
+import me.barny1094875.utilitiesog.modules.PhantomToggleModule;
+import me.barny1094875.utilitiesog.modules.PingModule;
+import me.barny1094875.utilitiesog.modules.RanksModule;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 
 public final class UtilitiesOG extends JavaPlugin {
 
@@ -93,7 +105,7 @@ public final class UtilitiesOG extends JavaPlugin {
         if (this.getConfig().getBoolean("ChainArmour")) {
             ChainArmour.Enable();
         }
-        // Enable the ColorCodes module
+        // Enable the ColorCodes modules
         if (this.getConfig().getBoolean("ColorCodes")) {
             this.getCommand("colorcodes").setExecutor(new ColorCodes());
         }
@@ -106,6 +118,12 @@ public final class UtilitiesOG extends JavaPlugin {
                 // Activate the NoFlippy Listener.
                 getServer().getPluginManager().registerEvents(new NoFlippy(), this);
             }
+        }
+        // Enable the MiniPlaceholders API module.
+        MiniPlaceholderAPI miniPlaceholders = new MiniPlaceholderAPI();
+        miniPlaceholders.register();
+        if (miniPlaceholders != null) {
+        	this.getLogger().info("MiniPlaceholders expansion registered.");
         }
 
         // Register the primary /utilities command.
