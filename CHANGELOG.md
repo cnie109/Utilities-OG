@@ -1,3 +1,16 @@
+**1.4:**
+
+- Added TrueOG Message API (supports modern + legacy formatting in the same message, &* for rainbow, and MiniPlaceholder expansion).
+- Added TrueOG MiniPlaceholderAPI (currently supports expansion. Creation coming later.)
+- Added MiniPlaceholder <player_display_name> (LuckPerms colors coming later.)
+- Added mock Bamboo Planks.
+- Mock Bamboo Wood is now crafted from 2x2 mock Bamboo Planks.
+- Added permissions for every command.
+- Major Refactoring.
+- Improved error handling.
+- Improved documentation.
+- Improved config file.
+
 **1.3.3:**
 
 - Update gradle build.

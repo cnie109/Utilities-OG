@@ -1,17 +1,17 @@
 plugins {
     java // Tell gradle this is a java project.
-    id("io.github.goooler.shadow") version "8.1.8"
+    id("io.github.goooler.shadow") version "8.1.8" // Import shadow plugin for dependency shading.
     eclipse // Import eclipse plugin for IDE integration.
     kotlin("jvm") version "1.9.23" // Import kotlin jvm plugin for kotlin/java integration.
 }
 
 java {
-    // Declare java version.
-    sourceCompatibility = JavaVersion.VERSION_17
+
+    sourceCompatibility = JavaVersion.VERSION_17 // Declare java compiler version.
 }
 
 group = "me.barny1094875" // Declare bundle identifier.
-version = "1.3.3" // Declare plugin version (will be in .jar).
+version = "1.4" // Declare plugin version (will be in .jar).
 val apiVersion = "1.19" // Declare minecraft server target version.
 
 tasks.named<ProcessResources>("processResources") {
@@ -31,18 +31,18 @@ repositories {
     mavenCentral()
 
     maven {
-        url = uri("https://repo.purpurmc.org/snapshots")
+        url = uri("https://repo.purpurmc.org/snapshots") // Import the PurpurMC Maven Repository.
     }
     
     maven {
     
-    	url = uri("https://repo.codemc.io/repository/maven-public/")
+    	url = uri("https://repo.codemc.io/repository/maven-public/") // Import the CodeMC Maven Repository.
     
     }
     
     maven {
     
-    	url = uri("https://maven.enginehub.org/repo/")
+    	url = uri("https://maven.enginehub.org/repo/") // Import the EngineHub Maven Repository.
     
     }
 }
@@ -55,7 +55,7 @@ dependencies {
     compileOnly("io.github.miniplaceholders:miniplaceholders-kotlin-ext:2.2.3") // Import MiniPlaceholders API helper.
 }
 
-tasks.withType<AbstractArchiveTask>().configureEach {
+tasks.withType<AbstractArchiveTask>().configureEach { // Ensure reproducible builds.
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
 }
@@ -71,29 +71,29 @@ tasks.jar {
 }
 
 tasks.shadowJar {
-    archiveClassifier.set("") // Use empty string instead of null
-    from("LICENSE") {
-        into("/")
+    archiveClassifier.set("") // Use empty string instead of null.
+    from("LICENSE") { // Copies license file.
+        into("/") // Sets destination for license file within the completed .jar.
     }
 }
 
 tasks.jar {
-    dependsOn("shadowJar")
+    dependsOn("shadowJar") // Ensures shadowJar gets run.
 }
 
 tasks.withType<JavaCompile>().configureEach {
     options.compilerArgs.add("-parameters")
-    options.encoding = "UTF-8"
+    options.encoding = "UTF-8" // Use UTF-8 encoding universally.
     options.isFork = true
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(17) // Declare kotlin jvm toolchain version.
 }
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-        vendor = JvmVendorSpec.GRAAL_VM
+        languageVersion = JavaLanguageVersion.of(17) // Declare JDK version.
+        vendor = JvmVendorSpec.GRAAL_VM // Declare JDK distribution.
     }
 }

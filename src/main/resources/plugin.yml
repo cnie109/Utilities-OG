@@ -1,9 +1,9 @@
 name: Utilities-OG
 authors: [ christianniehaus, NotAlexNoyle ]
-version: '2.1.2'
+version: '${version}'
+api-version: '${apiVersion}'
 main: me.barny1094875.utilitiesog.UtilitiesOG
-api-version: 1.19
-depend: [ WorldGuard ]
+softdepend: [ WorldGuard ]
 commands:
   utilities:
     usage: /utilites
@@ -21,6 +21,12 @@ commands:
     usage: /colorcodes
 
 permissions:
+  utilities.about:
+    description: Permission to use the base /utilities command.
+    default: op
+  utilities.colorcodes:
+    description: Permission to use the /colorcodes command.
+    default: op
   utilities.togglephantoms:
     description: Permission to use the /togglephantoms command.
     default: op
