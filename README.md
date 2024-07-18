@@ -1,54 +1,99 @@
 # Utilities-OG
 
+A collection of utilities and APIs used by [TrueOG Network](https://true-og.net/). Developed by christianniehaus & NotAlexNoyle.
+
 Current Target: Purpur 1.19.4
 
-Authors: Barny1094875.
-
-<h3>To build:</h3>
+## Building:
 
 ./gradlew build
 
 The resulting .jar file will be in build/libs
 
-This plugin houses various little tweaks used by the TrueOG Minecraft server.
-
 At the moment, any config change requires a server restart to take effect.
 
-*Current Features*
+## Features:
 
-- Phantom Toggle
+* **Mock Bamboo:** Enables crafting mock bamboo planks from 2x2 bamboo and mock bamboo wood from 2x2 mock bamboo planks.
+* **Chain Armor:** Enables crafting chain armor from chains.
+* **Color Codes:** Displays information to players about Bukkit's chat color codes and their syntax.
+* **MiniPlaceholderAPI:** Enables a custom, easy-to-use MiniPlaceholders API (**Note:** May require additional configuration for specific placeholders).
+* **NoFlippy:** Prevents trapdoors from being flipped in WorldGuard regions where the "can-flippy" flag is set to DENY (Requires WorldGuard plugin).
+* **TogglePhantoms:** Allows players to use the `/togglephantoms` command to turn phantom spawning on or off for themselves.
+* **Ping:** Provides two commands: `/ping` (displays real player ping) and `/bing` (replicates vanilla /ping functionality).
+* **Ranks Menu:** Displays information to players about available ranks at the [TrueOG Network Store](https://store.true-og.net).
 
-Use /utilites togglephantoms to disable phantom spawning. Use it again to enable phantom spawning.
-*Requires utilities.togglephantoms permission.*
+**Warning:**
 
-- Entity Cramming Disable
+* **DisableEntityCramming (Default: false):** Disables entity cramming damage server-wide. This can cause lag if no other plugin manages entity limits. Enable this Module only if you have a separate plugin managing entity limitations.
 
-Use /utilites togglecramming to disable entity cramming. use it again to enable entity cramming.
-*Requires utilities.togglecramming permission.*
+## Permissions:
 
-- Ranks Menu
+* **`utilities.about`**
+    * **Description:** Allows players to use the base `/utilities` command to get information about the plugin.
+    * **Default:** `op` (Server Operator)
+* **`utilities.colorcodes`**
+    * **Description:** Grants permission to use the `/colorcodes` command to view Bukkit chat color code information.
+    * **Default:** `op` (Server Operator)
+* **`utilities.togglephantoms`**
+    * **Description:** Allows players to use the `/togglephantoms` command to enable or disable phantom spawning for themselves.
+    * **Default:** `op` (Server Operator)
+* **`utilities.togglecramming`**
+    * **Description:** Grants permission to use the `/togglecramming` command (if enabled) to manage entity cramming damage.
+    * **Default:** `op` (Server Operator)
+* **`utilities.ranks`**
+    * **Description:** Allows players to use the `/ranks` command to view information about available ranks on the TrueOG Network Store.
+    * **Default:** `op` (Server Operator)
+* **`utilities.ping`**
+    * **Description:** Grants permission to use the `/ping` (real ping) and `/bing` (mimics vanilla ping) commands.
+    * **Default:** `op` (Server Operator)
 
-Use /utilities ranks to show the TrueOG store menu.
-*Requires utilities.ranks permission.*
+**Please note:** These permissions can be modified in the Utilities-OG configuration file config.yml.
 
-- Ping Menu
+### API Documentation:
 
-Use /utilities ping to show your own ping, or /utilities ping <player> to show someone else's.
-Also includes /bing which replicates the functionality of the default /ping in minecraft.
-*Requires utilities.ping permission.*
+**1. trueogSendMessage(Player player, String message)**
 
-- Bamboo Wood
+Send a message to the player with TrueOG formatting (supports legacy and modern formatting).
 
-Allows crafting of bamboo wood prior to 1.20
+```java
+Player targetPlayer = Bukkit.getPlayer("USERNAME");
+UtilitiesOG.trueogSendMessage(targetPlayer, "&6This is a &*message with <green>True&4OG <bold>formatting!");
+```
 
-- Chainmail Armour
+**2. trueogExpandMiniPlaceholders(Player player, String input)**
 
-Allows the crafting of chainmail armour with chains
+Expands MiniPlaceholders within a string for the given player. (**Note:** Requires MiniPlaceholdersAPI to be enabled in the config).
 
-- NoFlippy
+```java
+Player targetPlayer = Bukkit.getPlayer("SomePlayer");
+String message = "Welcome back, <player_display_name>!";
+TextComponent expandedMessage = UtilitiesOG.trueogExpandMiniPlaceholders(targetPlayer, message);
+UtilitiesOG.trueogSendMessage(targetPlayer, expandedMessage);
+```
 
-Plugin made by NotAlexNoyle that has been merged in here. Prevents trapdoors being flipped in certain regions by certain groups
+**3. ranksCommand():**
 
-- ColorCodes
+Returns a new instance of the RanksCommand class, allowing you to potentially customize its behavior in the future.
 
-Another of NotAlexNoyle's plugins merged here. Reveals bukkit's color codes for chat formatting
+```java
+RanksCommand ranksCommand = UtilitiesOG.ranksCommand();
+// Future configuration here.
+```
+
+**4. pingCommand():**
+
+Returns a new instance of the PingCommand class, allowing you to potentially customize its behavior in the future.
+
+```java
+PingCommand pingCommand = UtilitiesOG.pingCommand();
+// Future configuration here.
+```
+
+## TODO:
+
+- LuckPerms colors for <player_display_name>.
+
+- trueOGCreateMiniPlaceholderAPI.
+
+- Customization options for the Ranks and Ping APIs.

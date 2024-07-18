@@ -2,190 +2,313 @@
 // Authors: christianniehaus, NotAlexNoyle.
 package me.barny1094875.utilitiesog;
 
-import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.protection.flags.Flag;
-import com.sk89q.worldguard.protection.flags.StateFlag;
-import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
-import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
-import me.barny1094875.utilitiesog.Listeners.DisableEntityCramming;
-import me.barny1094875.utilitiesog.Listeners.DisablePhantomSpawns;
-import me.barny1094875.utilitiesog.modules.*;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
-
+// Import libraries.
 import java.io.File;
 import java.io.IOException;
 
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
+
+import com.sk89q.worldguard.protection.flags.StateFlag;
+
+import me.barny1094875.utilitiesog.Listeners.DisableEntityCrammingListener;
+import me.barny1094875.utilitiesog.Listeners.NoFlippyListener;
+import me.barny1094875.utilitiesog.Listeners.TogglePhantomsListener;
+import me.barny1094875.utilitiesog.commands.AboutCommand;
+import me.barny1094875.utilitiesog.commands.BingCommand;
+import me.barny1094875.utilitiesog.commands.ColorCodesCommand;
+import me.barny1094875.utilitiesog.commands.PingCommand;
+import me.barny1094875.utilitiesog.commands.RanksCommand;
+import me.barny1094875.utilitiesog.commands.ToggleCrammingCommand;
+import me.barny1094875.utilitiesog.commands.TogglePhantomsCommand;
+import me.barny1094875.utilitiesog.internal.FlagRegistrationException;
+import me.barny1094875.utilitiesog.internal.MiniPlaceholderAPI;
+import me.barny1094875.utilitiesog.internal.Utils;
+import me.barny1094875.utilitiesog.modules.ChainArmorModule;
+import me.barny1094875.utilitiesog.modules.MockBambooModule;
+import net.kyori.adventure.text.TextComponent;
+
+// Declare main plugin class.
 public final class UtilitiesOG extends JavaPlugin {
 
-    private File file;
-    private static UtilitiesOG plugin;
-    private static final MiniMessage mm = MiniMessage.miniMessage();
-    private static FileConfiguration config;
-    private static File phantomPreferencesFile;
-    private static YamlConfiguration phantomPreferences;
-    private static StateFlag FlippyFlag;
+	// Declare empty fields for use later.
+	private File file;
+	private static UtilitiesOG plugin;
+	private static FileConfiguration config;
+	private static File phantomPreferencesFile;
+	private static YamlConfiguration phantomPreferences;
+	private static StateFlag FlippyFlag;
 
-    @Override
-    public void onEnable() {
+	// When the plugin is enabled, do this...
+	@Override
+	public void onEnable() {
 
-        plugin = this;
+		// Populate the main class getter getPlugin().
+		plugin = this;
 
-        this.file = new File(this.getDataFolder(), "config.yml");
-        if (!this.file.exists()) {
-            this.saveDefaultConfig();
-        }
+		// Attempt to populate the file object with the config file.
+		this.file = new File(this.getDataFolder(), "config.yml");
 
-        config = this.getConfig();
+		// If the config file was not found, do this...
+		if (! this.file.exists()) {
 
-        phantomPreferencesFile = new File(this.getDataFolder(), "phantomDisabledUsers.yml");
-        try {
-            if (!phantomPreferencesFile.exists()) {
+			// Create the config file in the filesystem using the one in the assembled plugin .jar.
+			this.saveDefaultConfig();
 
-                phantomPreferencesFile.createNewFile();
+		}
 
-            }
-        } catch (IOException e) {
+		// Cast the config file from a File to a FileConfiguration.
+		config = this.getConfig();
 
-            this.getLogger().severe("Something went wrong when creating the phantom toggle cache file!");
+		// Attempt to populate the file object with the phantom toggle cache file.
+		phantomPreferencesFile = new File(this.getDataFolder(), "phantomDisabledUsers.yml");
 
-        }
+		try {
 
-        phantomPreferences = YamlConfiguration.loadConfiguration(phantomPreferencesFile);
+			// If the phantom toggle cache file was not found, do this...
+			if (! phantomPreferencesFile.exists()) {
 
-        // Set up each feature here, using the config to enable only that which is desired,
-        // be sure to label, using comments, what each block is enabling.
+				// Create the phantom toggle cache file in the filesystem using the one in the assembled plugin .jar.
+				phantomPreferencesFile.createNewFile();
 
-        // Enable the Phantom Toggle Module.
-        if (this.getConfig().getBoolean("PhantomToggle")) {
-            // Activate the Phantom Toggle Listener.
-            getServer().getPluginManager().registerEvents(new DisablePhantomSpawns(), this);
-            // Activate the Phantom Toggle Command.
-            this.getCommand("togglephantoms").setExecutor(new PhantomToggleModule());
-        }
-        // Enable the Entity Cramming Toggle Module.
-        if (this.getConfig().getBoolean("EntityCrammingDisable")) {
-            // Activate the Entity Cramming Toggle Listener.
-            getServer().getPluginManager().registerEvents(new DisableEntityCramming(), this);
-            // Activate the Entity Cramming Toggle Command.
-            this.getCommand("togglecramming").setExecutor(new EntityCrammingToggleModule());
-        }
-        // Enable the Ranks Module.
-        if (this.getConfig().getBoolean("RanksMenu")) {
-            // Activate the Ranks Command.
-            this.getCommand("ranks").setExecutor(new RanksModule());
-        }
-        // Enable the Ping Module.
-        if (this.getConfig().getBoolean("Ping")) {
-            // Enable the Ping command.
-            this.getCommand("ping").setExecutor(new PingModule());
-            // Enable the Bing command (replicates old /ping functionality).
-            this.getCommand("bing").setExecutor(new BingModule());
-        }
-        // Enable bamboo wood module
-        if (this.getConfig().getBoolean("BambooWood")) {
-            BambooWood.Enable();
-        }
-        // Enable chain armour module
-        if (this.getConfig().getBoolean("ChainArmour")) {
-            ChainArmour.Enable();
-        }
-        // Enable the ColorCodes module
-        if (this.getConfig().getBoolean("ColorCodes")) {
-            this.getCommand("colorcodes").setExecutor(new ColorCodes());
-        }
-        // Enable the NoFlippy module
-        if (this.getConfig().getBoolean("NoFlippy")) {
-            // check that WorldGuard is installed
-            if (getServer().getPluginManager().getPlugin("WorldGuard") == null) {
-                this.getLogger().severe("WorldGuard is not installed! Disabling NoFlippy...");
-            } else {
-                // Activate the NoFlippy Listener.
-                getServer().getPluginManager().registerEvents(new NoFlippy(), this);
-            }
-        }
+			}
 
-        // Register the primary /utilities command.
-        this.getCommand("utilities").setExecutor(new AboutModule());
+		}
+		// If there is a file IO error, do this...
+		catch (IOException error) {
 
-    }
+			// Log the problem with creating the phantom toggle cache file to the server console.
+			this.getLogger().severe("ERROR: Failed to create the phantom toggle cache file! " + error.getMessage());
 
-    @Override
-    public void onLoad() {
+		}
 
-        // Add the WorldGuard flag for an area where NoFlippy is active.
-        FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
-        try {
+		// Cast the phantom toggle cache file from a File to a YamlConfiguration.
+		phantomPreferences = YamlConfiguration.loadConfiguration(phantomPreferencesFile);
 
-            // Create a flag with the name "my-custom-flag", defaulting to true.
-            StateFlag flag = new StateFlag("can-flippy", true);
+		// TrueOG Network Contributors: set up each feature below, using the config file to enable only that which is desirable by default.
+		// Be sure to label, using comments, which feature(s) each block is enabling.
 
-            // Register the new flag with WorldGuard.
-            registry.register(flag);
+		// FEATURE: Enable crafting chain armor using chains.
+		// If the Chain Armor Module is enabled in the config file, do this...
+		if (this.getConfig().getBoolean("ChainArmor")) {
 
-            // Only set the field if there was no error.
-            FlippyFlag = flag;
+			// Enable the Chain Armor Module.
+			ChainArmorModule.Enable();
 
-        } catch (FlagConflictException e) {
+		}
 
-            // Some other plugin registered a flag by the same name already.
-            // You can use the existing flag, but this may cause conflicts - be sure to check type.
-            Flag<?> existing = registry.get("can-flippy");
-            if (existing instanceof StateFlag) {
+		// FEATURE: Display information to the player about the syntax for bukkit's color codes.
+		// If the Color Codes Module is enabled in the config file, do this...
+		if (this.getConfig().getBoolean("ColorCodes")) {
 
-                FlippyFlag = (StateFlag) existing;
+			// If the Color Codes Module is enabled in the config file, do this...
+			this.getCommand("colorcodes").setExecutor(new ColorCodesCommand());
 
-            }
+		}
 
-        }
+		// FEATURE: Disable entity cramming server-wide. Entity cramming is when mobs pile up and cause damage to each other.
+		// WARNING: Make sure there is another plugin that establishes entity limits if this module is enabled. Otherwise the server will lag.
+		// If the Entity Cramming Toggle Module is enabled in the config file, do this...
+		if (this.getConfig().getBoolean("DisableEntityCramming")) {
 
-    }
+			// Activate the Entity Cramming Toggle Listener.
+			getServer().getPluginManager().registerEvents(new DisableEntityCrammingListener(), this);
 
+			// Activate the Entity Cramming Toggle Command.
+			this.getCommand("togglecramming").setExecutor(new ToggleCrammingCommand());
 
-    // Rank menu API.
-    public RanksModule ranksCommand() {
-        return new RanksModule();
-    }
+		}
 
-    // Ping API.
-    public PingModule pingCommand() {
-        return new PingModule();
-    }
+		// FEATURE: A custom, easy to use MiniPlaceholders API.
+		// If the MiniPlaceholdersAPI Module is enabled in the config file, do this...
+		if (this.getConfig().getBoolean("MiniPlaceholderAPI")) {
 
-    public static UtilitiesOG getPlugin() {
-        return plugin;
-    }
+			// Enable the TrueOG MiniPlaceholdersAPI Module.
+			MiniPlaceholderAPI miniPlaceholders = new MiniPlaceholderAPI();
 
-    public static FileConfiguration config() {
-        return config;
-    }
+			// Register our custom MiniPlaceholdersAPI Module with MiniPlaceholders.
+			miniPlaceholders.register();
 
-    public static MiniMessage getMM() {
-        return mm;
-    }
+		}
 
-    public static YamlConfiguration getPhantomPreferences() {
-        return phantomPreferences;
-    }
+		// FEATURE: Pre-1.20 Mock Bamboo Wood. Makes Bamboo craft into Oak Planks called "Bamboo Wood".
+		// If the Bamboo Wood Module is enabled in the config file, do this...
+		if (this.getConfig().getBoolean("MockBamboo")) {
 
-    public static File getPhantomDisabledPlayersFile() {
-        return phantomPreferencesFile;
-    }
+			// Enable the Bamboo Wood Module.
+			MockBambooModule.Enable();
 
-    // Share FlippyFlag with Listeners.
-    public static StateFlag getFlippyFlag() {
-        return FlippyFlag;
-    }
+		}
 
-    // Runs plugin asynchronously so multiple players can use it at once efficiently.
-    public BukkitTask runTaskAsynchronously(final Runnable run) {
+		// FEATURE: Prevent trap doors from being flipped in any WorldGuard regions with the "can-flippy" flag set to DENY.
+		// If the NoFlippy Module is enabled in the config file, do this...
+		if (this.getConfig().getBoolean("NoFlippy")) {
 
-        // Schedule Processes.
-        return this.getServer().getScheduler().runTaskAsynchronously(this, run);
+			// If WorldGuard is installed, do this...
+			if (getServer().getPluginManager().getPlugin("WorldGuard") != null) {
 
-    }
+				// Activate the NoFlippy Listener.
+				getServer().getPluginManager().registerEvents(new NoFlippyListener(), this);
+
+			}
+			// If WorldGuard is not installed, do this...
+			else {
+
+				// Log WorldGuard not being found to the server console.
+				this.getLogger().severe("WorldGuard is not installed! Disabling NoFlippy...");
+
+			}
+
+		}
+
+		// FEATURE: A /ping command that returns a player's real ping.
+		// FEATURE: A /bing command that replicates the functionality of the default /ping command.
+		// If the Ping Module is enabled in the config file, do this...
+		if (this.getConfig().getBoolean("Ping")) {
+
+			// Enable the Ping command.
+			this.getCommand("ping").setExecutor(new PingCommand());
+
+			// Enable the Bing command.
+			this.getCommand("bing").setExecutor(new BingCommand());
+
+		}
+
+		// FEATURE: Display information to the player about the ranks available at the TrueOG Network Store (https://store.true-og.net/).
+		// If the Ranks Menu Module is enabled in the config file, do this...
+		if (this.getConfig().getBoolean("RanksMenu")) {
+
+			// Activate the Ranks Command.
+			this.getCommand("ranks").setExecutor(new RanksCommand());
+
+		}
+
+		// FEATURE: Enable individual players to toggle phantom spawning on or off with the command /togglephantoms.
+		// If the Phantom Toggle Module is enabled in the config file, do this...
+		if (this.getConfig().getBoolean("TogglePhantoms")) {
+
+			// Activate the Phantom Toggle Listener.
+			getServer().getPluginManager().registerEvents(new TogglePhantomsListener(), this);
+
+			// Activate the Phantom Toggle Command.
+			this.getCommand("togglephantoms").setExecutor(new TogglePhantomsCommand());
+
+		}
+
+		// FEATURE: Display meta-information about Utilities-OG. Always enabled.
+		// Enable the root /utilities command to display information about the plugin to the player.
+		this.getCommand("utilities").setExecutor(new AboutCommand());
+
+	}
+
+	// After the server loads, do this...
+	@Override
+	public void onLoad() {
+
+		try {
+
+			// Register the Flag "can-flippy" with WorldGuard, and make the it retrievable.
+			FlippyFlag = NoFlippyListener.registerNoFlippyWorldGuardFlag(FlippyFlag);
+
+		}
+		// If the WorldGuard Flag registration failed, do this...
+		catch (FlagRegistrationException error) {
+
+			// Log the WorldGuard Flag registration error to the server console.
+			this.getLogger().severe("ERROR: Failed to register the can-flippy Flag with WorldGuard. " + error.getMessage());
+
+		}
+
+	}
+
+	// Getter/API for TrueOG message formatting. Supports legacy Bukkit color codes. Case insensitive.
+	public static void trueogSendMessage(Player player, String message) {
+
+		// Forward the message to the server.
+		Utils.trueogMessage(player, message);
+
+	}
+
+	// API for TrueOG MiniPlaceholderAPI creation.
+	public static void trueogCreateMiniPlaceholder() {
+
+		// TODO: Implement the trueogCreateMiniPlaceholder API.
+
+	}
+	
+	// Getter/API for TrueOG MiniPlaceholderAPI expansion.
+	public static TextComponent trueogExpandMiniPlaceholders(Player player, String input) {
+
+		// Expand all the MiniPlaceholders in a given String.
+		return MiniPlaceholderAPI.expandPlayerMiniPlaceholders(player, input);
+
+	}
+
+	// Getter/API for the Ranks Module.
+	public static RanksCommand ranksCommand() {
+
+		// Return a fresh Ranks Module.
+		return new RanksCommand();
+
+	}
+
+	// Getter/API for the Ping Module.
+	public static PingCommand pingCommand() {
+
+		// Return a fresh Ping Module.
+		return new PingCommand();
+
+	}
+
+	// Getter/API for Utilities-OG.
+	public static UtilitiesOG getPlugin() {
+
+		// Return the current Utilities-OG instance.
+		return plugin;
+
+	}
+
+	// Getter for the config file.
+	public static FileConfiguration config() {
+
+		// Return the config file in FileConfiguration form.
+		return config;
+
+	}
+
+	// Getter/API for the phantom toggle cache file.
+	public static File getPhantomDisabledPlayersFile() {
+
+		// Return the phantom toggle cache file.
+		return phantomPreferencesFile;
+
+	}
+
+	// Getter/API for the phantom toggle cache file in YAML form.
+	public static YamlConfiguration getPhantomPreferences() {
+
+		// Return the phantom toggle cache file in YAML form.
+		return phantomPreferences;
+
+	}
+
+	// Getter for the FlippyFlag state.
+	public static StateFlag getFlippyFlag() {
+
+		// Return the FlippyFlag for WorldGuard.
+		return FlippyFlag;
+
+	}
+
+	// Runs plugin asynchronously so multiple players can use it at once efficiently.
+	public BukkitTask runTaskAsynchronously(final Runnable run) {
+
+		// Schedule processes.
+		return this.getServer().getScheduler().runTaskAsynchronously(this, run);
+
+	}
 
 }

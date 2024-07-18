@@ -1,14 +1,19 @@
-# area for all of the feature enabling/disabling
-PhantomToggle: true
-EntityCrammingDisable: false
-RanksMenu: true
-Ping: true
-BuyMenu: true
-BambooWood: true
-ChainArmour: true
+# Pre-1.20 Mock Bamboo Planks and Bamboo Wood. Mock Bamboo Planks are crafted from 2x2 Bamboo. Mock Bamboo Wood is crafted from 2x2 mock Bamboo Planks. Default: true. 
+MockBamboo: true
+# Crafting chain armor using chains. Default: true.
+ChainArmor: true
+# Displays information to the player about the syntax for bukkit's color codes. Default: true.
 ColorCodes: true
+# Turn off entity cramming damage server-wide. Entity cramming is when mobs pile up and cause damage to each other. Default: false.
+# WARNING: Make sure there is another plugin that establishes entity limits if this module is enabled. Otherwise the server will lag.
+DisableEntityCramming: false
+# A custom, easy to use MiniPlaceholders API. Default: true.
+MiniPlaceholderAPI: true
+# Prevents trap doors from being flipped in any WorldGuard regions with the "can-flippy" flag set to DENY. Default: true.
 NoFlippy: true
-
-# all of the below are config used by the plugin
-# whether to disable entity cramming or not
-doEntityCramming: false
+# Empowers individual players to toggle phantom spawning on or off with the command /togglephantoms. Default: true.
+TogglePhantoms: true
+# A /ping command that returns a player's real ping, in addition to a /bing command that replicates the functionality of the default /ping command. Default: true.
+Ping: true
+# Displays information to the player about the ranks available at the TrueOG Network Store (https://store.true-og.net/). Default: true.
+RanksMenu: true
