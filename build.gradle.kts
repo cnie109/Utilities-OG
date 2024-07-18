@@ -6,12 +6,13 @@ plugins {
 }
 
 java {
-
-    sourceCompatibility = JavaVersion.VERSION_17 // Declare java compiler version.
+    // Declare java version.
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 group = "me.barny1094875" // Declare bundle identifier.
 version = "1.4" // Declare plugin version (will be in .jar).
+
 val apiVersion = "1.19" // Declare minecraft server target version.
 
 tasks.named<ProcessResources>("processResources") {
@@ -71,7 +72,7 @@ tasks.jar {
 }
 
 tasks.shadowJar {
-    archiveClassifier.set("") // Use empty string instead of null.
+    archiveClassifier.set("") // Use empty string instead of null
     from("LICENSE") { // Copies license file.
         into("/") // Sets destination for license file within the completed .jar.
     }
