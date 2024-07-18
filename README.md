@@ -50,21 +50,6 @@ At the moment, any config change requires a server restart to take effect.
 
 **Please note:** These permissions can be modified in the Utilities-OG configuration file config.yml.
 
-### Features
-
-The plugin offers various functionalities that can be enabled/disabled through the configuration file (`config.yml`).
-
-* **Chain Armor:** Craft chain armor using chains.
-* **Color Codes:** Displays information about Bukkit color codes.
-* **Disable Entity Cramming:** Server-wide toggle for entity cramming. (**WARNING:** Requires another plugin for entity limits)
-* **MiniPlaceholdersAPI:** A custom, lightweight MiniPlaceholders API.
-* **Mock Bamboo:** Makes bamboo craft into Oak Planks called "Bamboo Wood" (pre-1.20)
-* **NoFlippy:** Prevents trap doors from flipping in WorldGuard regions with `can-flippy` flag set to `DENY`. (Requires WorldGuard)
-* **Ping/Bing:** Commands to display player ping.
-* **Ranks Menu:** Displays information about ranks available at TrueOG Network Store.
-* **Toggle Phantoms:** Allows players to toggle phantom spawning with `/togglephantoms`.
-* **About:** Displays plugin information using `/utilities`.
-
 ### API Documentation:
 
 **1. trueogSendMessage(Player player, String message)**
